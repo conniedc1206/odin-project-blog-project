@@ -5,3 +5,13 @@
 <ul>
   <li><%= link_to "Edit", edit_article_path(@article) %></li>
 </ul>
+
+<%# Now let's add a link at the bottom of app/views/articles/show.html.erb so that we can delete an article from its own page: %>
+<%# In the above code, we use the data option to set the data-turbo-method and data-turbo-confirm HTML attributes of the "Destroy" link. Both of these attributes hook into Turbo, which is included by default in fresh Rails applications. data-turbo-method="delete" will cause the link to make a DELETE request instead of a GET request. data-turbo-confirm="Are you sure?" will cause a confirmation dialog to appear when the link is clicked. If the user cancels the dialog, the request will be aborted. %>
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li><%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>

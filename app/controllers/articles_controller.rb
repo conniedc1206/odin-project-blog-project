@@ -39,6 +39,15 @@ class ArticlesController < ApplicationController
     end
   end
 
+  # The destroy action fetches the article from the database, and calls destroy on it. Then, it redirects the browser to the root path with status code 303 See Other.
+  # We have chosen to redirect to the root path because that is our main access point for articles. But, in other circumstances, you might choose to redirect to e.g. articles_path.
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to root_path, status: :see_other
+  end
+
   private
   # strong params for handling invalid user input is another step of that process. 
   def article_params
